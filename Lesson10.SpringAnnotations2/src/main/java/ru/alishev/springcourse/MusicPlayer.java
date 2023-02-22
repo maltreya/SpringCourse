@@ -1,7 +1,10 @@
 package ru.alishev.springcourse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import java.util.Random;
 
 /**
  * @author Neil Alishev
@@ -17,7 +20,13 @@ public class MusicPlayer {
         this.rockMusic = rockMusic;
     }
 
-    public String playMusic() {
-        return "Playing: " + classicalMusic.getSong();
+    public void playMusic(Genre genre) {
+        Random random = new Random();
+        int randomNumber = random.nextInt(3);
+        if (genre == Genre.CLASSICAL) {
+            System.out.println(classicalMusic.getSong().get(randomNumber));
+        } else {
+            System.out.println(rockMusic.getSong().get(randomNumber));
+        }
     }
 }
