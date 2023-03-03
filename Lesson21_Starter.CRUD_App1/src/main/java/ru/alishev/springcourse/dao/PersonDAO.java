@@ -1,5 +1,6 @@
 package ru.alishev.springcourse.dao;
 
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.alishev.springcourse.models.Person;
 
@@ -13,6 +14,7 @@ public class PersonDAO {
     private static final String URL = "jdbc:postgresql://localhost:5432/first_db";
     private static final String USERNAME = "postgres";
     private static final String PASSWORD = "pokol666";
+    private final JdbcTemplate jdbcTemplate;
 
     private static Connection connection;
 
