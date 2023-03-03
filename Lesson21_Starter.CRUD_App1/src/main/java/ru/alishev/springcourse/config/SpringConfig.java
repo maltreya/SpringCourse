@@ -5,6 +5,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+<<<<<<< HEAD
+=======
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+>>>>>>> f53fc40b5b9f6b08f5e0560cbfdfadb9e4b8bdc2
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -15,6 +20,10 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 import javax.sql.DataSource;
+<<<<<<< HEAD
+=======
+import java.util.Objects;
+>>>>>>> f53fc40b5b9f6b08f5e0560cbfdfadb9e4b8bdc2
 
 /**
  * @author Neil Alishev
@@ -22,13 +31,16 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan("ru.alishev.springcourse")
 @EnableWebMvc
+@PropertySource("classpath:database.properties")
 public class SpringConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
+    private final Environment environment;
 
     @Autowired
-    public SpringConfig(ApplicationContext applicationContext) {
+    public SpringConfig(ApplicationContext applicationContext, Environment environment) {
         this.applicationContext = applicationContext;
+        this.environment = environment;
     }
 
     @Bean
@@ -58,10 +70,17 @@ public class SpringConfig implements WebMvcConfigurer {
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
+<<<<<<< HEAD
         dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setUrl("jdbc:postgresql://localhost:5432/first_db");
         dataSource.setUsername("postgres");
         dataSource.setPassword("pokol666");
+=======
+        dataSource.setDriverClassName(Objects.requireNonNull(environment.getProperty("driver")));
+        dataSource.setUrl(environment.getProperty("url"));
+        dataSource.setUsername(environment.getProperty("username_value"));
+        dataSource.setPassword(environment.getProperty("password"));
+>>>>>>> f53fc40b5b9f6b08f5e0560cbfdfadb9e4b8bdc2
         return dataSource;
     }
     @Bean
